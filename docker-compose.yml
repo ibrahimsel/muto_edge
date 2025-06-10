@@ -1,0 +1,24 @@
+services:
+  edge: &edge_base
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ROS_DOMAIN_ID=53
+      - ROS_LOCALHOST_ONLY=1
+    networks:
+      - edge_network
+  edge2:
+    <<: *edge_base
+    environment:
+      - ROS_DOMAIN_ID=54
+      - ROS_LOCALHOST_ONLY=1
+  edge3:
+    <<: *edge_base
+    environment:
+      - ROS_DOMAIN_ID=55
+      - ROS_LOCALHOST_ONLY=1
+
+networks:
+  edge_network:
+    driver: bridge
